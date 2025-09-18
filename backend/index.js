@@ -7,6 +7,7 @@ const cors = require('cors');
 const app = express();
 
 // Allowed origins
+
 const allowedOrigins = process.env.FRONTEND_URL
   ? process.env.FRONTEND_URL.split(",")
   : ["http://localhost:5173"];
