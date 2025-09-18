@@ -7,21 +7,18 @@ const cors = require('cors');
 const app = express();
 
 // Allowed origins
-const allowedOrigins = [
-  "http://localhost:5173"              // Local dev
-];
-
-// Add FRONTEND_URL from .env if exists
-if (process.env.FRONTEND_URL) {
-  allowedOrigins.push(process.env.FRONTEND_URL);
-}
+const allowedOrigins = process.env.FRONTEND_URLS
+  ? process.env.FRONTEND_URLS.split(",")
+  : ["http://localhost:5173"];
 
 // CORS middleware
 app.use(cors({
   origin: function (origin, callback) {
+    // allow requests with no origin (like Postman) or from allowed origins
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.log("Blocked by CORS:", origin); // debug
       callback(new Error("Not allowed by CORS"));
     }
   },
