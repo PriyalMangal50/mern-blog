@@ -11,6 +11,7 @@ const allowedOrigins = process.env.FRONTEND_URL
   ? process.env.FRONTEND_URL.split(",")
   : ["http://localhost:5173"];
 
+
 // CORS middleware
 app.use(cors({
   origin: function (origin, callback) {
